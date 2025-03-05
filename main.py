@@ -1,32 +1,31 @@
-#print("hello world")
-def charCount(book):
-    return len(list(filter(None,list(book.replace("\n"," ").split(" ")))))
+from stats import letterCount,charCount
+import sys
 
-def letterCount(book):
-    temp = {}
-    for i in book:
-        if not i.isalpha():
-            continue
-        letter = i.lower()
-        if letter not in temp.keys():
-            temp[letter] = 1
-        else:
-            temp[letter] += 1
-    return temp
+#print("hello world")
+
+def get_book_text(book):
+    with open(book) as f:
+        return f.read()
 
 def main():
-    book = "books/frankenstein.txt"
+    if len(sys.argv) < 2:
+        print("Usage: python3 main.py <path_to_book>")
+        sys.exit(1)
+    book = sys.argv[1]
+    #print(get_book_text("books/frankenstein.txt"))
     with open(book) as f:
         file_content = f.read()
-        #print(type(file_content))
         #print(file_content)
         #print(charCount(file_content))
         #print(letterCount(file_content))
         report = letterCount(file_content)
-    print(f"--- Being report of {book} ---")
-    print(f"{charCount(file_content)} words found in the document\n")
+    print(f"============ BOOKBOT ============\nAnalyzing book found at {book}...")
+    print(f"----------- Word Count ----------")
+    print(f"Found {charCount(file_content)} total words")
+    print(f"--------- Character Count -------")
+    #print(report)
     for i in sorted(report.keys(), key=report.get, reverse=True):
-        print(f"The {repr(i)} character was found {report[i]} times")
-    print("--- End report ---")
+        print(f"{i}: {report[i]}")
+    print("============= END ===============")
 
 main()
