@@ -15,6 +15,8 @@ def letterCount(book):
     return temp
 
 def main():
+    print("greetings boots")
+    return
     book = "books/frankenstein.txt"
     with open(book) as f:
         file_content = f.read()
