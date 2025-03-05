@@ -1,0 +1,12 @@
+#print("hello world!")
+
+def wordCount(book):
+    return(len(book))
+
+def main():
+    with open("books/frankenstein.txt") as f:
+        file_contents = f.read()
+        #print(file_contents)
+        print(wordCount(file_contents))
+
+main()
